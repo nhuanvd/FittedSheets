@@ -19,6 +19,7 @@ class BugVerificationsViewController: UIViewController {
         
         self.addButton(for: SlideInAnimationBug118ViewController.self)
         self.addButton(for: PresentFullscreenModalCausesDidDismiss.self)
+        self.addButton(for: FullscreenSafariLayoutDemo.self)
     }
     
     func addButton(for demo: (UIViewController & Demoable).Type, onTap: (() -> Void)? = nil) {

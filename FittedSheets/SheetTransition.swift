@@ -39,11 +39,12 @@ public class SheetTransition: NSObject, UIViewControllerAnimatedTransitioning {
                 SheetTransition.currentPresenters.append(presenter)
             }
             sheet.contentViewController.view.transform = .identity
+            // Full-screen presentations remove this view and its container constraints.
+            // Frame-based sizing survives reattachment when the covering controller closes.
+            sheet.view.translatesAutoresizingMaskIntoConstraints = true
+            sheet.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            sheet.view.frame = transitionContext.finalFrame(for: sheet)
             containerView.addSubview(sheet.view)
-            //sheet.view.frame = containerView.frame
-            Constraints(for: sheet.view) {
-                $0.edges.pinToSuperview()
-            }
             UIView.performWithoutAnimation {
                 sheet.view.layoutIfNeeded()
             }
